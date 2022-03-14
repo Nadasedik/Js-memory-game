@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Memory game</title>
+</head>
+<style type="text/css">
+	#imge{
+		width: 690px;
+		margin: 0 auto;
+		border-radius: 10px;
+		overflow: hidden;
+		background-color: lightgray;
+		height: 500px;
+	}
+	div{
+		float: left;
+		background: url(back.jfif);
+		margin: 5px;
+      width: 160px;
+      height: 160px;
+	}
+	img{
+		opacity: 0;
+		width: 165px;
+		height: 165px;
+	}
+</style>
+<body>
+<h1 style="text-align: center;">Memory Game</h1>
+<section id="imge"></section>
+
+<script type="text/javascript">
+var counter=0
+	var imgs=['1.jfif','2.jfif','3.jfif','4.jfif','5.jfif','6.jfif'
+	          ,'1.jfif','2.jfif','3.jfif','4.jfif','5.jfif','6.jfif'];
+
+	var game=document.getElementById("imge");
+	var alldiv=document.getElementsByTagName("div");
+    
+	function displayImg(){
+	  for(var i=0;i<imgs.length;i++)
+	  {
+		game.innerHTML+='<div><img src="'+imgs[i]+'" width:25%></div>'
+
+	   }
+	}
+	displayImg();
+	alert("Start Game")
+	var flag=true;
+	var arr=[];
+    for(var j=0;j<alldiv.length;j++)
+    {
+    	alldiv[j].addEventListener('click',function(){
+    		if(flag)
+    		 {this.firstElementChild.style.opacity='1';
+    		  if(arr.length==0)
+    		      {arr[0]=this;}
+
+    		   else if(arr.length==1)
+    		   {
+    		   	arr[1]=this;
+                
+    		   }
+
+    		   if(arr.length==2)
+    		   	{ flag=false;
+                 setTimeout(check,400)
+    		     }
+    		    
+
+    	      }
+              else{return;}
+    	})
+
+
+
+    	function check()
+     {
+      
+        if(arr[0].firstElementChild.getAttribute('src')==arr[1].firstElementChild.getAttribute('src'))
+    		{arr[1].firstElementChild.style.opacity=1;counter++}
+    	 else{
+    	    	arr[0].firstElementChild.style.opacity=0;
+    		   	arr[1].firstElementChild.style.opacity=0;
+    		   }
+               
+    		   flag=true; 
+    		   arr=[];
+			   if(counter==6){
+				   alert("you win")
+			   }
+     }
+
+
+    }
+
+</script>
+</body>
+</html>
